@@ -21,6 +21,6 @@ from app_demo import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^hello$/', views.hello), # use url to find the def in views
+    url(r'^hello/$', views.hello), # use url to find the def in views
     path('hrs/',include('hrs.urls'))  # use include to get all the path in one time
 ]
