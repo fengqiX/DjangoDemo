@@ -22,5 +22,6 @@ from app_demo import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^hello/$', views.hello), # use url to find the def in views
-    path('hrs/',include('hrs.urls'))  # use include to get all the path in one time
+    path('hrs/',include('hrs.urls')) , # use include to get all the path in one time
+    path('polls/',include('polls.urls')) #include('polls.urls')) is the path like //djangoDemo/polls/urls.py
 ]

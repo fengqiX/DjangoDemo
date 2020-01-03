@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app_demo',  #  register new app
-    'hrs'
+    'hrs',
+    'polls'
 ]
 
 MIDDLEWARE = [
@@ -78,7 +79,7 @@ WSGI_APPLICATION = 'djangoDemo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodemo',
+        'NAME': 'polls',
         'HOST':'127.0.0.1',
         'PORT':3306,
         'USER':'root',
