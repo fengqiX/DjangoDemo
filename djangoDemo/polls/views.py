@@ -7,7 +7,7 @@ from .models import Questions,Choice
 from django.shortcuts import render,get_object_or_404
 from django.urls import reverse
 from django.views import generic
-
+from django.utils import timezone
 
 # def index(request):
 #     latest_question_list = Questions.objects.order_by('-pud_date')[:5]
@@ -27,8 +27,14 @@ from django.views import generic
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
+
     def get_queryset(self):
-        return Questions.objects.order_by('-pud_date')[:5]
+        # return Questions.objects.order_by('-pud_date')[:5]
+        return Questions.objects.filter(
+            pud_date__lte=timezone.now()
+        ).exclude(
+            choice__isnull=True  # check if the question object has choice object, if not exclude
+        ).order_by('-pud_date')[:5]
 
 
 # def details(request, question_id):
@@ -47,6 +53,9 @@ class DetailView(generic.DetailView):
     model = Questions
     template_name = 'polls/detail.html'
     context_object_name='question'
+    def get_queryset(self):
+        now=timezone.now()
+        return Questions.objects.filter(pud_date__lte=now)
 
 # def results(request,question_id):
 #     # response = "You're looking at the results of question %s."

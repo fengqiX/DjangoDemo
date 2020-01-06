@@ -10,7 +10,10 @@ class Questions(models.Model):
     def __str__(self):
         return self.question_text
     def was_published_recently(self):
-        return self.pud_date >= timezone.now() - timedelta(days=1)
+        now = timezone.now()
+        return now - timedelta(days=1) <= self.pud_date <= now
+    def has_choice_set(self):
+        return (self.choice_set.all())>0
 
 class Choice(models.Model):
     question = models.ForeignKey(Questions, on_delete=models.CASCADE)
