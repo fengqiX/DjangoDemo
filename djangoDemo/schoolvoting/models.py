@@ -20,3 +20,10 @@ class Teacher(models.Model):
     good_count=models.IntegerField(default=0)
     bad_count=models.IntegerField(default=0)
     subject = models.ForeignKey(to=Subject,on_delete=models.PROTECT,db_column='sno')
+
+
+class User(models.Model):
+    no = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=20,unique=True)
+    password = models.CharField(max_length=32)
+    reg_date = models.DateTimeField(auto_now_add=True,verbose_name='register date')

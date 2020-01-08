@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static '/js/ajax.js' %} "></script>
+    <title>Teacher</title>
+</head>
+<body>
+    <h1>{{subject.name}} Teacher information</h1>
+<hr>
+{% if teachers%}
+{% for teacher in teachers%}
+<div>
+    <div>
+        <img src="{% static teacher.photo %}" alt="">
+    </div>
+    <div>
+        <h3>{{teacher.name}}</h3>
+        <p>{{teacher.detail}}</p>
+        <p class="comment">
+            <a href="{% url 'schoolvoting:praise' teacher.no%}">Good comments</a>(<span>{{teacher.good_count}}</span>)
+            <a href="{% url 'schoolvoting:criticize' teacher.no%}">Bad comments</a>(<span>{{teacher.bad_count}}</span>)
+        </p>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<h3>There is no teachers under Subject {{subject.name}}</h3>
+{% endif%}
+<p>
+    <a href="/vote">Main Page</a>
+</p>
+
+
+
+</body>
+</html>
