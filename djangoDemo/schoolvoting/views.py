@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
+
+from .logical.register import RegisterForm
 from .models import Subject, Teacher
 from django.http import JsonResponse
+
 # Create your views here.
 
 def show_subjects(request):
@@ -33,3 +36,19 @@ def praise_or_criticize(request,teacher_no):
     except (KeyError,ValueError,Teacher.DoesNotExist):
         data = {'code':404, 'hint':'Operation Failed'}
     return JsonResponse(data)
+
+def register(request):
+    page='schoolvoting/register.html'
+    hint=""
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            page='schoolvoting/login.html'
+            hint='Register successfully! Please Login!'
+        else:
+            hint = "Please enter valid information!"
+    return render(request,page,{'hint':hint})
+
+def login(request):
+    return render(request,'schoolvoting/login.html')

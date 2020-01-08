@@ -14,12 +14,12 @@
                 {{subject.name}}
             </a>
             {% if subject.is_hot %}
-            <img src="{%static '/images/hot-icon-small.png'%}" width="32" alt="">
+            <img src="{% static '/images/hot-icon-small.png'%}" width="32" alt="">
             {% endif %}
 
         </h3>
         <p>{{subject.intro}}</p>
     </div>
-{%endfor%}
+{% endfor %}
 </body>
 </html>
